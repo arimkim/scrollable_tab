@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+      html,
+      body,
+      div,
+      span,
+      applet,
+      object,
+      iframe,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      blockquote,
+      pre,
+      a,
+      abbr,
+      acronym,
+      address,
+      big,
+      cite,
+      code,
+      del,
+      dfn,
+      em,
+      img,
+      ins,
+      kbd,
+      q,
+      s,
+      samp,
+      small,
+      strike,
+      strong,
+      sub,
+      sup,
+      tt,
+      var,
+      b,
+      u,
+      i,
+      center,
+      dl,
+      dt,
+      dd,
+      ol,
+      ul,
+      li,
+      fieldset,
+      form,
+      label,
+      legend,
+      table,
+      caption,
+      tbody,
+      tfoot,
+      thead,
+      tr,
+      th,
+      td,
+      article,
+      aside,
+      canvas,
+      details,
+      embed,
+      figure,
+      figcaption,
+      footer,
+      header,
+      hgroup,
+      menu,
+      nav,
+      output,
+      ruby,
+      section,
+      summary,
+      time,
+      mark,
+      audio,
+      video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+      }
+      /* HTML5 display-role reset for older browsers */
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      menu,
+      nav,
+      section {
+        display: block;
+      }
+      body {
+        line-height: 1;
+      }
+      ol,
+      ul {
+        list-style: none;
+      }
+
+      .tab {
+        position: relative;
+        z-index: 100;
+        height: 50px;
+        border-bottom: solid 1px #000;
+        background-color: #fff;
+      }
+      .tab_inner {
+        position: relative;
+        padding-right: 50px;
+      }
+      .tab_inner:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 2px;
+        z-index: 10;
+        width: 18px;
+        background: -webkit-gradient(
+          linear,
+          right top,
+          left top,
+          from(rgba(255, 255, 255, 0)),
+          color-stop(83.34%, #fff)
+        );
+        background: -webkit-linear-gradient(right, rgba(255, 255, 255, 0), #fff 83.34%);
+        background: linear-gradient(to left, rgba(255, 255, 255, 0), #fff 83.34%);
+      }
+      .tab_inner::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 37px;
+        bottom: 2px;
+        z-index: 10;
+        width: 42px;
+        background: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0)), color-stop(65%, #fff));
+        background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0), #fff 65%);
+        background: linear-gradient(to right, rgba(255, 255, 255, 0), #fff 65%);
+      }
+      .scroll_wrap {
+        overflow: hidden;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .scroll_wrap ul {
+        position: relative;
+        height: 100%;
+        font-size: 0;
+        line-height: 0;
+        white-space: nowrap;
+      }
+      .scroll_wrap ul li {
+        display: inline-block;
+        position: relative;
+        width: 70px;
+        height: 50px;
+        font-size: 20px;
+        text-align: center;
+      }
+
+      .scroll_wrap ul li button {
+        font-size: 20px;
+        height: 100%;
+        border: 0;
+        background: transparent;
+      }
+
+      .btn_tab_more {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 50px;
+        height: 50px;
+        z-index: 20;
+        background-color: aquamarine;
+      }
+
+      .btn_close {
+        width: 50px;
+        height: 50px;
+        background-color: rebeccapurple;
+      }
+
+      .tab_option {
+        display: none;
+      }
+
+      /* 클래스 isOpen 이용해 스타일 적용 */
+
+      .tab.isOpen {
+        height: auto;
+      }
+
+      .tab.isOpen .tab_inner::before,
+      .tab.isOpen .tab_inner::after {
+        content: none;
+      }
+
+      .tab.isOpen .tab_inner {
+        padding: 0;
+      }
+      .tab.isOpen .scroll_wrap {
+        overflow: hidden;
+        margin: 0 11px;
+        padding: 9px 0 10px;
+        height: auto !important;
+      }
+      .tab.isOpen .scroll_wrap ul li {
+        float: left;
+        width: 25%;
+      }
+      .tab.isOpen .btn_tab_more {
+        display: none;
+      }
+      .tab.isOpen .tab_option {
+        display: block;
+        position: relative;
+        border-top: 1px solid #eeeff1;
+        background-color: #f7f7f9;
+        font-size: 1.5rem;
+        color: #555;
+        line-height: 45px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="tab">
+      <div class="tab_inner">
+        <div class="scroll_wrap">
+          <ul>
+            <li><button type="button">01</button></li>
+            <li><button type="button">02</button></li>
+            <li><button type="button">03</button></li>
+            <li><button type="button">04</button></li>
+            <li><button type="button">05</button></li>
+            <li><button type="button">06</button></li>
+            <li><button type="button">07</button></li>
+            <li><button type="button">08</button></li>
+            <li><button type="button">09</button></li>
+            <li><button type="button">10</button></li>
+            <li><button type="button">11</button></li>
+            <li><button type="button">12</button></li>
+            <li><button type="button">13</button></li>
+            <li><button type="button">14</button></li>
+            <li><button type="button">15</button></li>
+            <li><button type="button">16</button></li>
+            <li><button type="button">17</button></li>
+            <li><button type="button">18</button></li>
+            <li><button type="button">19</button></li>
+            <li><button type="button">20</button></li>
+          </ul>
+        </div>
+        <button onclick="openList()" class="btn_tab_more">열기</button>
+      </div>
+      <div class="tab_option">
+        <button type="button" class="btn_close" onclick="closeList()">닫기</button>
+      </div>
+    </nav>
+    <script>
+      var tab = document.querySelector('.tab');
+
+      function openList() {
+        tab.classList.add('isOpen');
+      }
+
+      function closeList() {
+        tab.classList.remove('isOpen');
+      }
+    </script>
+  </body>
+</html>
